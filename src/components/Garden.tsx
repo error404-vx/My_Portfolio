@@ -7,13 +7,14 @@ type Filter = 'all' | Category;
 
 function ProjectCard({ project }: { project: Project }) {
   const ref = useReveal<HTMLElement>();
+  const categoryLabel = categories.find((category) => category.id === project.category)?.label ?? project.category;
   return (
     <article ref={ref} className={`card reveal tone-${project.category}`}>
       <div className="card-art">
         <Plant type={project.metaphor} />
       </div>
       <p className="card-meta">
-        {project.category === 'ai' ? 'AI' : project.category} · {project.year}
+        {categoryLabel} · {project.year}
       </p>
       <h3>
         <a className="card-link" href={`#/project/${project.slug}`}>
@@ -40,7 +41,7 @@ export function Garden() {
     <section id="projects" className="section container" aria-labelledby="projects-title">
       <h2 id="projects-title">Selected projects</h2>
       <p className="section-lede">
-        A selection of projects across frontend development, applied AI, and product strategy.
+        A set of practical web tools for clearer job applications and more accessible interfaces.
       </p>
 
       <div className="filters" role="group" aria-label="Filter projects">

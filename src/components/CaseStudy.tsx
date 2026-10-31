@@ -1,4 +1,4 @@
-import { projects } from '../data/content';
+import { categories, projects } from '../data/content';
 import { Plant } from './Plant';
 
 export function CaseStudy({ slug }: { slug: string }) {
@@ -21,6 +21,7 @@ export function CaseStudy({ slug }: { slug: string }) {
   const prev = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
   const { journal } = project;
+  const categoryLabel = categories.find((category) => category.id === project.category)?.label ?? project.category;
 
   return (
     <article className="container journal-wrap" aria-labelledby="case-title">
@@ -32,7 +33,7 @@ export function CaseStudy({ slug }: { slug: string }) {
         <header className="journal-head">
           <div>
             <p className="stamp">
-              Entry {String(index + 1).padStart(2, '0')} · {project.year} · {project.category === 'ai' ? 'AI' : project.category}
+              Entry {String(index + 1).padStart(2, '0')} · {project.year} · {categoryLabel}
             </p>
             <h1 id="case-title" tabIndex={-1} data-route-heading>
               {project.title}
